@@ -17,11 +17,11 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         <ol>
-            @foreach(INPUT as $data)
+            @foreach($data as $row)
                 <li>
-                    <b>{{ $data['name'] }}</b>
-                    <span>Cost: {{ $data['cost'] }}</span>
-                    <span>Amount: {{ $data['amount'] }}</span>
+                    <b>{{ $row['name'] }}</b>
+                    <span>Cost: {{ $row['cost'] }}</span>
+                    <span>Amount: {{ $row['amount'] }}</span>
                 </li>
             @endforeach
         </ol>
