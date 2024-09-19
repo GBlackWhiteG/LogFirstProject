@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Order;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
 {
@@ -23,19 +24,22 @@ class ProductController extends Controller
     public function buy(Product $product): RedirectResponse
     {
         $data = request()->validate([
-            'amount' => 'integer|required',
+            'amount' => 'integer|required|min:1',
         ]);
 
         $buy_amount = $data["amount"];
         $total_cost = $buy_amount * $product['cost'];
 
-        if ($data['amount'] <= $product['amount'] && $data['amount'] > 0) {
-            $data['amount'] = $product['amount'] - $data['amount'];
-            $product->update($data);
-
-            $order_data = ['name' => $product['name'], 'amount' => $buy_amount, 'total' => $total_cost];
-            Order::create($order_data);
+        if ($data['amount'] >= $product['amount']) {
+            throw ValidationException::withMessages(['Incorrect amount']);
         }
+
+        $data['amount'] = $product['amount'] - $data['amount'];
+        $product->update($data);
+
+        $order_data = ['name' => $product['name'], 'amount' => $buy_amount, 'total' => $total_cost];
+        Order::create($order_data);
+
         return redirect()->route('order.index', ['product' => $product]);
     }
 }

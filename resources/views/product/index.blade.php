@@ -11,7 +11,7 @@
                             <h2>{{ $product['name'] }}</h2>
                             <span>Цена: {{ $product['cost'] }}</span>
                             <span>Количество: {{ $product['amount'] }}</span>
-                            <button class="btn">
+                            <button class="btn" @if($product['amount'] <= 0) disabled @endif>
                                 @if( $product['amount'] > 0)
                                     Купить
                                 @else
