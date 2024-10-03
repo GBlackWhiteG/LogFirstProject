@@ -20,8 +20,12 @@
             <div class="items__nav">
                 <a href="{{ route('product.index') }}">Каталог</a>
                 <a href="{{ route('order.index') }}">Заказы</a>
-                <a href="#">Link</a>
-                <a href="#">Link</a>
+                @if(session()->has('user'))
+                    <a href="{{ route('user.logout') }}">Выход</a>
+                @else
+                    <a href="{{ route('user.signup') }}">Регистрация</a>
+                    <a href="{{ route('user.login') }}">Вход</a>
+                @endif
             </div>
         </div>
     </div>

@@ -13,6 +13,7 @@ class ProductController extends Controller
     public function index(): View
     {
         $products = Product::all();
+
         return view('product.index', compact('products'));
     }
 
@@ -37,7 +38,11 @@ class ProductController extends Controller
         $data['amount'] = $product['amount'] - $data['amount'];
         $product->update($data);
 
-        $order_data = ['name' => $product['name'], 'amount' => $buy_amount, 'total' => $total_cost];
+        $order_data =
+            ['product_id' => $product['id'],
+                'amount' => (int)$buy_amount,
+                'total' => $total_cost,
+                'user_id' => session('user')['id']];
         Order::create($order_data);
 
         return redirect()->route('order.index', ['product' => $product]);
