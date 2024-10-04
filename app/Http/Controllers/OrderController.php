@@ -10,7 +10,6 @@ class OrderController extends Controller
 {
     public function index(): View
     {
-//        $orders = Order::where('user_id', session('user')['id']);
         $orders = Order::with('product')->where('user_id', Auth::id())->get();
 
         return view('order.index', compact('orders'));

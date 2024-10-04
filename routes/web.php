@@ -12,7 +12,7 @@ Route::post('signup', [AuthController::class, 'register'])->name('user.register'
 Route::get('login', [AuthController::class, 'login'])->name('user.login')->middleware('guest');
 Route::post('login', [AuthController::class, 'auth'])->name('user.auth')->middleware('guest');
 
-Route::get('logout', [LogoutController::class, 'logout'])->name('user.logout')->middleware('auth');
+Route::get('logout', [AuthController::class, 'logout'])->name('user.logout')->middleware('auth');
 
 
 Route::get('/', [ProductController::class, 'index'])->name('product.index')->middleware('auth');
