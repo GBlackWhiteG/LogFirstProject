@@ -3,7 +3,7 @@
     <section class="reg">
         <div class="container">
             <h2>Регистрация</h2>
-            <form action="{{ route('user.store') }}" method="POST" class="wrapper__reg-form">
+            <form action="{{ route('user.register') }}" method="POST" class="wrapper__reg-form">
                 @csrf
                 @method('post')
                 <div>

@@ -20,7 +20,7 @@
             <div class="items__nav">
                 <a href="{{ route('product.index') }}">Каталог</a>
                 <a href="{{ route('order.index') }}">Заказы</a>
-                @if(session()->has('user'))
+                @if(\Illuminate\Support\Facades\Auth::user())
                     <a href="{{ route('user.logout') }}">Выход</a>
                 @else
                     <a href="{{ route('user.signup') }}">Регистрация</a>

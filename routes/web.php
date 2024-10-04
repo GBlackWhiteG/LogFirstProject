@@ -7,9 +7,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('registration', [RegistrationController::class, 'create'])->name('user.signup')->middleware('guest');
-Route::post('registration', [RegistrationController::class, 'store'])->name('user.store')->middleware('guest');
-
+Route::get('signup', [AuthController::class, 'signup'])->name('user.signup')->middleware('guest');
+Route::post('signup', [AuthController::class, 'register'])->name('user.register')->middleware('guest');
 Route::get('login', [AuthController::class, 'login'])->name('user.login')->middleware('guest');
 Route::post('login', [AuthController::class, 'auth'])->name('user.auth')->middleware('guest');
 
