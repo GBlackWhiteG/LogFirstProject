@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->text('description');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 
@@ -21,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('description');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropForeign('user_id');
         });
     }
 };

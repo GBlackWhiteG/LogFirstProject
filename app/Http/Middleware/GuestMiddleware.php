@@ -17,7 +17,7 @@ class GuestMiddleware
      */
     public function handle(Request $request, Closure $next): Response | RedirectResponse
     {
-        if (!Auth::user()) {
+        if (!Auth::check()) {
             return $next($request);
         }
         else {

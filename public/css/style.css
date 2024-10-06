@@ -36,6 +36,10 @@ body {
     padding: 5px 10px;
 }
 
+.flex {
+    display: flex;
+}
+
 
 /* NAV */
 .nav {

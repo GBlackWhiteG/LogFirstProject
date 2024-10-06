@@ -20,7 +20,10 @@
             <div class="items__nav">
                 <a href="{{ route('product.index') }}">Каталог</a>
                 <a href="{{ route('order.index') }}">Заказы</a>
-                @if(\Illuminate\Support\Facades\Auth::user())
+                @if(\Illuminate\Support\Facades\Auth::check())
+                    @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
+                        <a href="{{ route('admin.index') }}">Админ.панель</a>
+                    @endif
                     <a href="{{ route('user.logout') }}">Выход</a>
                 @else
                     <a href="{{ route('user.signup') }}">Регистрация</a>

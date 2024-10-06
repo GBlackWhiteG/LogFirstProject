@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Order;
 use Illuminate\View\View;
@@ -38,12 +39,14 @@ class ProductController extends Controller
         $data['amount'] = $product['amount'] - $data['amount'];
         $product->update($data);
 
-        $order_data =
-            ['product_id' => $product['id'],
-                'amount' => (int)$buy_amount,
-                'total' => $total_cost,
-                'user_id' => session('user')['id']];
-        Order::create($order_data);
+        $order_data = [
+            'amount' => (int)$buy_amount,
+            'total' => $total_cost,
+            'user_id' => Auth::id(),
+        ];
+        $order = Order::create($order_data);
+        $product = Product::find($product['id']);
+        $order->products()->attach($product);
 
         return redirect()->route('order.index', ['product' => $product]);
     }
