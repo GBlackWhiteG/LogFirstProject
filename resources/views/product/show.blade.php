@@ -9,6 +9,11 @@
                     <span>Цена: {{ $product['cost'] }}</span>
                     <span>Количество: {{ $product['amount'] }}</span>
                     <p>Описание: {{ $product['description'] }}</p>
+                    @if ($errors->any())
+                        @foreach($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    @endif
                     <form action="{{ route('product.buy', $product->id) }}" method="post" class="buy-block">
                         @csrf
                         @method('patch')

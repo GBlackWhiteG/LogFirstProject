@@ -24,6 +24,8 @@ class OrderController extends Controller
         $status_code = array_search($status, $statuses);
         $status_method = (int)request()['status_method'];
 
+        $status_method = $status_method >= 0 ? 1 : -1;
+
         if (isset($statuses[$status_code + $status_method])) {
             $status = $statuses[$status_code + $status_method];
         }

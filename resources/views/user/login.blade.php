@@ -3,6 +3,11 @@
     <section class="reg">
         <div class="container">
             <h2>Вход</h2>
+            @if ($errors->any())
+                @foreach($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            @endif
             <form action="{{ route('user.auth') }}" method="POST" class="wrapper__reg-form">
                 @csrf
                 @method('post')
